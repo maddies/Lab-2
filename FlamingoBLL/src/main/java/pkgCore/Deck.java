@@ -1,19 +1,33 @@
 package pkgCore;
 
-public class Deck {
+import java.util.ArrayList;
+import java.util.Collections;
 
-	//	TODO: Add 'cards' attribute that is an ArrayList of Card
+import pkgEnum.*;
+
+public class Deck {
+	private ArrayList<Card> deckOfCards;
 	
+	public Deck(int number) {
+		deckOfCards = new ArrayList<Card>(); 
+		for(int i = 0; i < number ; i++) {
+			for (eSuit S : eSuit.values()) {
+				 for (eRank R : eRank.values()) {
+					 if(R != eRank.ONE) {
+						 deckOfCards.add(new Card(S,R));
+					 }
+				 }
+			}
+		}
+		
+		Collections.shuffle(deckOfCards);
+	}
 	
-	//	TODO: Add a contructor that passes in the number of decks, and then populates
-	//			ArrayList<Card> with cards (depending on number of decks).
+	public int size() {
+		return deckOfCards.size();
+	}
 	
-	//			Example: Deck(1) will build one 52-card deck.  There are 52 different cards
-	//			2 clubs, 3 clubs... Ace clubs, 2 hearts, 3 hearts... Ace hearts, etc
-	
-	//			Deck(2) will create an array of 104 cards.
-	
-	
-	//	TODO: Add a draw() method that will take a card from the deck and
-	//			return it to the caller
+	public Card draw() {
+		return deckOfCards.remove(0);
+	}
 }
